@@ -8,30 +8,30 @@ export class App extends Component {
     neutral: 0,
     bad: 0,
   };
-  handleGood = () => {
-    this.setState(prevState => {
-      return {
-        good: prevState.good + 1,
-      };
-    });
-    this.countTotalFeedback();
-  };
-  handleNeutral = () => {
-    this.setState(prevState => {
-      return {
-        neutral: prevState.neutral + 1,
-      };
-    });
-    this.countTotalFeedback();
-  };
-  handleBad = () => {
-    this.setState(prevState => {
-      return {
-        bad: prevState.bad + 1,
-      };
-    });
-    this.countTotalFeedback();
-  };
+  // handleGood = () => {
+  //   this.setState(prevState => {
+  //     return {
+  //       good: prevState.good + 1,
+  //     };
+  //   });
+  //   this.countTotalFeedback();
+  // };
+  // handleNeutral = () => {
+  //   this.setState(prevState => {
+  //     return {
+  //       neutral: prevState.neutral + 1,
+  //     };
+  //   });
+  //   this.countTotalFeedback();
+  // };
+  // handleBad = () => {
+  //   this.setState(prevState => {
+  //     return {
+  //       bad: prevState.bad + 1,
+  //     };
+  //   });
+  //   this.countTotalFeedback();
+  // };
   countTotalFeedback = () => {
     const { bad, good, neutral } = this.state;
     return bad + good + neutral;
@@ -42,9 +42,9 @@ export class App extends Component {
     return total > 0 ? Math.round((good / total) * 100) : 0;
   };
 
-  handleFeedback = selectedOption => {
+  handleFeedback = type => {
     this.setState(prevState => ({
-      [selectedOption]: prevState[selectedOption] + 1,
+      [type]: prevState[type] + 1,
     }));
   };
 
