@@ -2,39 +2,18 @@ import { Component } from 'react';
 import { Statistics } from './Statistics';
 import { FeedbackOptions } from './FeedbackOptions';
 import { Section } from './Section';
+import { Notification } from "./Notification";
 export class App extends Component {
   state = {
     good: 0,
     neutral: 0,
     bad: 0,
   };
-  // handleGood = () => {
-  //   this.setState(prevState => {
-  //     return {
-  //       good: prevState.good + 1,
-  //     };
-  //   });
-  //   this.countTotalFeedback();
-  // };
-  // handleNeutral = () => {
-  //   this.setState(prevState => {
-  //     return {
-  //       neutral: prevState.neutral + 1,
-  //     };
-  //   });
-  //   this.countTotalFeedback();
-  // };
-  // handleBad = () => {
-  //   this.setState(prevState => {
-  //     return {
-  //       bad: prevState.bad + 1,
-  //     };
-  //   });
-  //   this.countTotalFeedback();
-  // };
+ 
   countTotalFeedback = () => {
-    const { bad, good, neutral } = this.state;
-    return bad + good + neutral;
+    // const { good, neutral, bad } = this.state;
+    const values = Object.values(this.state);
+    return values.reduce((total, value) => total + value, 0);
   };
   countPositiveFeedbackPercentage = () => {
     const total = this.countTotalFeedback();
@@ -59,13 +38,17 @@ export class App extends Component {
           />
         </Section>
         <Section title="Statistics">
-          <Statistics
-            good={this.state.good}
-            neutral={this.state.neutral}
-            bad={this.state.bad}
-            total={this.countTotalFeedback()}
-            positivePercentage={this.countPositiveFeedbackPercentage()}
-          />
+          {this.countTotalFeedback() === 0 ? (
+            <Notification message="There is no feedback" />
+          ) : (
+            <Statistics
+              good={this.state.good}
+              neutral={this.state.neutral}
+              bad={this.state.bad}
+              total={this.countTotalFeedback()}
+              positivePercentage={this.countPositiveFeedbackPercentage()}
+            />
+          )}
         </Section>
       </div>
     );
